@@ -9,11 +9,11 @@ import os
 dotenv_path = Path('src/env/api.env')
 
 load_dotenv(dotenv_path=dotenv_path)
+load_dotenv()
 
 app = Flask('BotAPI')
-app.wsgi_app = middleware(app.wsgi_app)
 
-load_dotenv()
+app.wsgi_app = middleware(app.wsgi_app)
 
 REDIS_HOST_ADRRESS = os.getenv('REDIS_HOST_ADDRESS')
 REDIS_HOST_PORT = os.getenv('REDIS_HOST_PORT')
@@ -35,3 +35,6 @@ def start():
 @app.route('/cache', methods=['POST'])
 def onPost():
     return jsonify(default)
+
+if __name__ == '__main__':
+    app.run(debug=True)
