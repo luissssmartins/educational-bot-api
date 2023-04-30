@@ -1,7 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from redis import Redis
 from dotenv import load_dotenv
 from pathlib import Path
+from middlewares import middleware
 
 import os
 
@@ -9,7 +10,8 @@ dotenv_path = Path('src/env/api.env')
 
 load_dotenv(dotenv_path=dotenv_path)
 
-app = Flask(__name__)
+app = Flask('Educational Bot API')
+app.wsgi_app = middleware(app.wsgi_app)
 
 load_dotenv()
 
@@ -25,8 +27,10 @@ default = [
      'consumer': 'consumer'}
 ]
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def start():
+    key = request.environ['api_key']
+    
     return 'Aplicação rodando com sucesso.'
 
 @app.route('/cache', methods=['POST'])
