@@ -30,8 +30,7 @@ default = [
 @app.route('/', methods=['GET', 'POST'])
 def start():
     key = request.environ['api_key']
-    
-    return 'Aplicação rodando com sucesso.'
+    return f'Aplicação rodando com sucesso. API Key: {key}'
 
 @app.route('/cache', methods=['POST'])
 def onPost():
