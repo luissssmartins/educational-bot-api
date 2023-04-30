@@ -10,7 +10,7 @@ dotenv_path = Path('src/env/api.env')
 
 load_dotenv(dotenv_path=dotenv_path)
 
-app = Flask('Educational Bot API')
+app = Flask('BotAPI')
 app.wsgi_app = middleware(app.wsgi_app)
 
 load_dotenv()

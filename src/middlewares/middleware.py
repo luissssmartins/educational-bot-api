@@ -12,11 +12,11 @@ class middleware:
 
         api_key = request.authorization['api_key']
 
-        if (api_key == self.api_key):
+        if api_key == self.api_key:
             environ['api_key'] = { 'api_key': api_key }
 
             return self.app(environ, response)
         
         res = Response(f'Autorização falhou', mimetype='text/plain', status=403)
-        
+
         return res(environ, response)
