@@ -1,4 +1,5 @@
 from werkzeug.wrappers import Request, Response, ResponseStream
+
 import os
 
 class Middleware:
@@ -17,6 +18,6 @@ class Middleware:
 
             return self.app(environ, start_response)
         
-        res = Response(f'Autorização falhou', mimetype='text/plain', status=403)
+        res = Response(u'Autorização falhou', mimetype='text/plain', status=401)
 
         return res(environ, start_response)
